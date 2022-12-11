@@ -40,7 +40,7 @@ public class GunSystem : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= _nextTimeToFire)
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= _nextTimeToFire && currentAmmo > 0)
         {
             _nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
