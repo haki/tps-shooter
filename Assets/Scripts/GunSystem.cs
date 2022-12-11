@@ -3,26 +3,27 @@ using UnityEngine;
 
 public class GunSystem : MonoBehaviour
 {
-    public KeyCode reloadKeyCode = KeyCode.R;
+    // References
+    [SerializeField] private KeyCode reloadKeyCode = KeyCode.R;
+    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject enemyHpBar;
     public WeaponStyle mWeaponStyle;
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffect;
-    public GameObject enemyHpBar;
-    public bool isReloading = false;
-
     public Sprite passiveIcon;
     public Sprite activeIcon;
 
-    public float damage = 10f;
-    public float range = 100f;
-    public float impactForce = 30f;
-    public float fireRate = 15f;
-    public float reloadTime = 1f;
-
-    public int maxAmmo = 10;
+    // Variables
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private float range = 100f;
+    [SerializeField] private float impactForce = 30f;
+    [SerializeField] private float fireRate = 15f;
+    [SerializeField] private float reloadTime = 1f;
+    [SerializeField] private int maxAmmo = 10;
+    public bool isReloading = false;
     public int magazineSize = 400;
     public int currentAmmo;
 
+    // Private variables
     private Camera _camera;
     private float _nextTimeToFire = 0f;
 

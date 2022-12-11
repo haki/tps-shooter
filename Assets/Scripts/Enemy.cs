@@ -4,17 +4,20 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float maxHealth = 50f;
-    public float health = 50f;
-    public float damage = 5f;
-    public float attackDuration = 1f;
-    public float attackRange = 1.5f;
-    public float speed = 2f;
+    // Variables
+    [SerializeField] private float maxHealth = 50f;
+    [SerializeField] private float health = 50f;
+    [SerializeField] private float damage = 5f;
+    [SerializeField] private float attackDuration = 1f;
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float speed = 2f;
+    
+    // References
     [SerializeField] private Transform player;
     [SerializeField] private GameObject hpBar;
     [SerializeField] private GameObject hpIndicator;
-    [SerializeField] private ZombieCount zombieCount;
 
+    // Private variables
     private NavMeshAgent _enemy;
     private Animator _animator;
     private BoxCollider _collider;
@@ -25,6 +28,8 @@ public class Enemy : MonoBehaviour
     private float _lastDamage;
     private bool _attacking = false;
     private bool _isDied = false;
+    
+    // Animation variables
     private static readonly int AttackAnim = Animator.StringToHash("Attack");
     private static readonly int Die1 = Animator.StringToHash("Die");
 
@@ -96,7 +101,7 @@ public class Enemy : MonoBehaviour
 
         if (!_isDied)
         {
-            zombieCount.CountDown();
+            ZombieCount.Instance.CountDown();
             _isDied = true;
         }
 

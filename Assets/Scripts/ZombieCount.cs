@@ -3,30 +3,33 @@ using UnityEngine.UI;
 
 public class ZombieCount : MonoBehaviour
 {
-    public static ZombieCount Instance { get; set; }
-
-    public float remainingZombies;
-
+    // Instance
+    public static ZombieCount Instance { get; private set; }
+    
+    // References
     [SerializeField] private GameObject enemies;
-
+    
+    // Private variables
+    private float _remainingZombies;
     private float _totalZombies;
     private Text _text;
 
     private void Start()
     {
+        Instance = this;
         _totalZombies = enemies.transform.childCount;
-        remainingZombies = _totalZombies;
+        _remainingZombies = _totalZombies;
         _text = GetComponent<Text>();
 
-        _text.text = remainingZombies + " / " + _totalZombies;
+        _text.text = _remainingZombies + " / " + _totalZombies;
     }
 
     public void CountDown()
     {
-        remainingZombies--;
-        _text.text = remainingZombies + " / " + _totalZombies;
+        _remainingZombies--;
+        _text.text = _remainingZombies + " / " + _totalZombies;
 
-        if (remainingZombies == 0)
+        if (_remainingZombies == 0)
         {
             var totalWin = PlayerPrefs.GetInt("Win");
             totalWin++;

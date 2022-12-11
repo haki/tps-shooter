@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject[] weapons;
-    public Image[] itemSlots = new Image[3];
+    [SerializeField] private GameObject[] weapons;
+    [SerializeField] private Image[] itemSlots = new Image[3];
+    [SerializeField] private Text ammoInfo;
+    [SerializeField] private Sprite nullItem;
     public GameObject currentWeapon;
-    public Text ammoInfo;
-    public Sprite nullItem;
 
     private void Start()
     {

@@ -2,25 +2,24 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    public KeyCode pickUpKeyCode = KeyCode.E;
-    public KeyCode dropKeyCode = KeyCode.Q;
-
+    // References
+    [SerializeField] private KeyCode pickUpKeyCode = KeyCode.E;
+    [SerializeField] private KeyCode dropKeyCode = KeyCode.Q;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform gunContainer;
     public GunSystem gun;
     public Rigidbody rb;
     public BoxCollider coll;
-
-    public Transform player;
-    public Transform gunContainer;
-
-    public float pickUpRange;
-    public float dropForwardForce;
-    public float dropUpwardForce;
-
+    
+    // Variables
+    [SerializeField] private float pickUpRange;
+    [SerializeField] private float dropForwardForce;
+    [SerializeField] private float dropUpwardForce;
+    private static bool _slotFull;
     public bool equipped;
-    public static bool slotFull;
-
     public Vector3 defaultRotation;
 
+    // Private variables
     private Transform _camera;
 
     private void Start()
@@ -45,7 +44,7 @@ public class PickUpController : MonoBehaviour
         var distanceToPlayer = player.position - transform.position;
         if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(pickUpKeyCode))
         {
-            if (!slotFull)
+            if (!_slotFull)
             {
                 PickUp();
             }
@@ -68,7 +67,7 @@ public class PickUpController : MonoBehaviour
     private void PickUp()
     {
         equipped = true;
-        slotFull = true;
+        _slotFull = true;
 
         var inventory = player.GetComponent<Inventory>();
         inventory.AddItem(gameObject);
@@ -87,7 +86,7 @@ public class PickUpController : MonoBehaviour
     private void Drop()
     {
         equipped = false;
-        slotFull = false;
+        _slotFull = false;
 
         var inventory = player.GetComponent<Inventory>();
         inventory.RemoveItem(gameObject);
