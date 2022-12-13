@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Text userData;
     public Text winLoseText;
 
+    public bool isGameFinished = false;
+
     private void Awake()
     {
         Instance = this;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        isGameFinished = false;
         inGamePanel.SetActive(true);
         finishPanel.SetActive(false);
         startPanel.SetActive(false);
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (isGameFinished) return;
         Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0;
         inGamePanel.SetActive(false);
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowFinalPanel(bool isWin)
     {
+        isGameFinished = true;
         Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0;
 
